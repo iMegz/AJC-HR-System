@@ -1,0 +1,36 @@
+﻿@* @model List<HR_System.Models.Employee> *@
+@model List<Employee>
+
+
+    <a class="btn btn-primary text-dark" href="Employee/Add">
+            Add Employee
+    </a>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+            <th scope="col">JobTitle</th>
+            <th scope="col">Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Employee e in Model)
+        {
+            <tr>
+                <th scope="row">@e.Id</th>
+                <td>@e.FirstName</td>
+                <td>@e.LastName</td>
+                <td>@e.Email</td>
+                <td>@e.Job?.Title</td>
+                <td>@e.Salary</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
