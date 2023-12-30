@@ -1,32 +1,11 @@
 ﻿using HR_System.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace HR_System.Controllers
 {
-    public class EmployeeController : Controller
+    public class EmployeeController : BaseController<Employee>
     {
-        private readonly HRSystemDbContext _context;
-
-        public EmployeeController(HRSystemDbContext context)
+        public EmployeeController(HRSystemDbContext context):base(context, "Employee")
         {
-            _context = context;
-        }
-
-        public IActionResult Index()
-        {
-            List<Employee> employees = new List<Employee>();
-
-            employees = (from  emp in _context.Employees  select emp).ToList();
-
-            return View(employees);
-        }
-
-
-        public IActionResult Add()
-        {
-
-
-            return RedirectToAction("Index");
         }
     }
 }
