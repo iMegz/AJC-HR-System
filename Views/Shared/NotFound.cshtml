@@ -1,0 +1,10 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = (Model ?? "Page") + " Not Found";
+}
+
+
+<h1>404 - @(Model ?? "Page") Not Found</h1>
+<p>Oops! The @(Model ?? "Page") you are looking for might be unavailable or does not exist.</p>
+<p>Return to <a href="/">home</a>.</p>

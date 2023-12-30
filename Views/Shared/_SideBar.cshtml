@@ -1,0 +1,54 @@
+﻿@using System.Text.RegularExpressions
+@functions{
+    string isActive(string regex = "^/$")
+    {
+        Regex rx = new Regex(regex);
+        return rx.IsMatch(Context.Request.Path.Value) ? "active" : "";
+    }
+
+
+}
+
+<div id="sidebar">
+    <div class="brand">
+        <h2>HR System</h2>
+    </div>
+
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link @isActive()" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @isActive("/Employee")" asp-area="" asp-controller="Employee" asp-action="Index">
+                <i class="fas fa-users"></i> <span>Employees</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @isActive("/Jobs")" asp-area="" asp-controller="Jobs" asp-action="Index">
+                <i class="fas fa-briefcase"></i> <span>Jobs</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @isActive("/Applicants")" href="#">
+                <i class="fas fa-file-alt"></i> <span>Applicants</span>
+            </a>
+        </li>
+    </ul>
+
+
+   
+
+   
+
+    <!--<a href="#">
+        <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+    </a>
+    <a href="#">
+        <i class="fas fa-users"></i> <span>Employees</span>
+    </a>-->
+   
+   
+</div>

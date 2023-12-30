@@ -1,0 +1,45 @@
+﻿@model Job
+@{
+    ViewData["Title"] = Model != null ? "Edit Job" : "Add job";
+    string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T');
+    string defaultOpenUntil = Model != null ? Model.OpenUntil.ToString("yyyy-MM-ddTHH:mm:ss") : now;
+    string controller = Model != null ? $"PostEdit" : "PostAdd";
+}
+
+@using (Html.BeginForm(controller, "Jobs", FormMethod.Post, new { id = "jobForm" }))
+{
+<form  id="jobForm">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="Title" value="@Model?.Title" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" rows="8" style="resize:none" id="description" name="Description" required>@Model?.Description</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="openUntil" class="form-label">Job open until</label>
+        <input 
+            type="datetime-local" 
+            class="form-control" 
+            id="openUntil" 
+            aria-describedby="openUntilHelp" 
+            name="OpenUntil"
+            value="@defaultOpenUntil"
+            step="1"
+            required>
+        <div id="openUntilHelp" class="form-text">Passed dates mark the job as closed (No one can apply to it but you can still add empoyees)</div>
+    </div>
+    @Html.HiddenFor(m=>m.Id)
+    <button disabled="@(Model != null)" type="submit" class="btn btn-dark">@(Model != null ? "Edit" : "Add")</button>
+</form>
+}
+
+@if (Model != null)
+{
+    @section Scripts{
+        <script>
+            watchChanges("jobForm")
+        </script>
+    }
+}

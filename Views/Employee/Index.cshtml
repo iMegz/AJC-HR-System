@@ -1,10 +1,10 @@
-﻿@* @model List<HR_System.Models.Employee> *@
-@model List<Employee>
+﻿@model List<Employee>
 
+@{
+    ViewData["Title"] = "Employees";
+}
 
-    <a class="btn btn-primary text-dark" href="Employee/Add">
-            Add Employee
-    </a>
+<a class="btn btn-dark text-light mb-2" href="Employee/Add">Add Employee</a>
 
 
 <table class="table table-striped">
@@ -30,6 +30,7 @@
                 <td>@e.Salary</td>
             </tr>
         }
+        @Html.Raw(Model.Count == 0 ? "<tr><td colspan='6' class='text-center fw-bold p-3'>No jobs were found</td></tr>" : "")
     </tbody>
 </table>
 

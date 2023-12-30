@@ -4,6 +4,7 @@ using HR_System.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HR_System.Migrations
 {
     [DbContext(typeof(HRSystemDbContext))]
-    partial class HRSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231225172244_Add status to applicants")]
+    partial class Addstatustoapplicants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +99,7 @@ namespace HR_System.Migrations
                     b.Property<int>("MilitaryStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("applicantStatus")
+                    b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("Applicant");
