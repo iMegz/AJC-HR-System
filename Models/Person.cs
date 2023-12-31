@@ -17,7 +17,11 @@ namespace HR_System.Models
 
         public float? Salary { get; set; }
 
-        public Job? Job { get; set; }
+
+        [ForeignKey("Job")]
+        public int JobId { get; set; }
+
+        public virtual Job? Job { get; set; }
 
     }
 }

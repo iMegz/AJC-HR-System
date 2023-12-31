@@ -10,27 +10,27 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">Employee</th>
             <th scope="col">Email</th>
-            <th scope="col">JobTitle</th>
+            <th scope="col">Job</th>
             <th scope="col">Salary</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody>
         @foreach(Employee e in Model)
         {
             <tr>
-                <th scope="row">@e.Id</th>
-                <td>@e.FirstName</td>
-                <td>@e.LastName</td>
+                <td> <a href="Employee/Edit/@e.Id" class="details-link">@e.FirstName @e.LastName</a></td>
                 <td>@e.Email</td>
                 <td>@e.Job?.Title</td>
                 <td>@e.Salary</td>
+                <td>
+                    <a style="color:red" href="Employee/Delete/@e.Id">Delete</a>
+                </td>
             </tr>
         }
-        @Html.Raw(Model.Count == 0 ? "<tr><td colspan='6' class='text-center fw-bold p-3'>No jobs were found</td></tr>" : "")
+        @Html.Raw(Model.Count == 0 ? "<tr><td colspan='6' class='text-center fw-bold p-3'>No employees were found</td></tr>" : "")
     </tbody>
 </table>
 

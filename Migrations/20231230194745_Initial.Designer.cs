@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HR_System.Migrations
 {
     [DbContext(typeof(HRSystemDbContext))]
-    [Migration("20231225172244_Add status to applicants")]
-    partial class Addstatustoapplicants
+    [Migration("20231230194745_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace HR_System.Migrations
 
             modelBuilder.Entity("HR_System.Models.Job", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("JobId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobId"));
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -42,7 +42,7 @@ namespace HR_System.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("JobId");
 
                     b.ToTable("Jobs");
                 });
@@ -66,7 +66,7 @@ namespace HR_System.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("JobId")
+                    b.Property<int>("JobId")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
@@ -99,7 +99,7 @@ namespace HR_System.Migrations
                     b.Property<int>("MilitaryStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("status")
+                    b.Property<int>("applicantStatus")
                         .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("Applicant");
@@ -122,7 +122,9 @@ namespace HR_System.Migrations
                 {
                     b.HasOne("HR_System.Models.Job", "Job")
                         .WithMany("People")
-                        .HasForeignKey("JobId");
+                        .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Job");
                 });

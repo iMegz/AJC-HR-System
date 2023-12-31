@@ -34,7 +34,7 @@ namespace HR_System.Controllers
             // Awaits
             int jobsCount = await _context.Jobs.CountAsync();
             int employeesCount = await _context.Employees.CountAsync();
-            int applicantsCount = await _context.Employees.CountAsync();
+            int applicantsCount = await _context.Applicants.CountAsync();
 
             DashboardStats stats = new DashboardStats
             {
@@ -58,6 +58,6 @@ namespace HR_System.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        
+
     }
 }

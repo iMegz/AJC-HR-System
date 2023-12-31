@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HR_System.Models
+﻿namespace HR_System.Models
 {
     public class Employee : Person
     {

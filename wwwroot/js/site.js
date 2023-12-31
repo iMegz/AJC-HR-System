@@ -3,11 +3,12 @@
 
     const inputFields = form.querySelectorAll("input");
     const textAreas = form.querySelectorAll("textarea");
+    const selectFields = form.querySelectorAll("select");
 
     /**@type {HTMLButtonElement}*/
     const submitButton = form.querySelector('button[type="submit"]');
 
-    const fields = [...inputFields, ...textAreas]
+    const fields = [...inputFields, ...textAreas, ...selectFields]
 
     const oldObject = {}
     const newObject = {}
@@ -36,6 +37,6 @@
     }
 
     for (const e of fields) e.addEventListener("input", changeHandler)
-   
+
 }
 

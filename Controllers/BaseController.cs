@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HR_System.Controllers
 {
-    public abstract class BaseController<T> : Controller where T: class
+    public abstract class BaseController<T> : Controller where T : class
     {
-        private readonly HRSystemDbContext _context;
-        private readonly string _notFoundType;
+        protected readonly HRSystemDbContext _context;
+        protected readonly string _notFoundType;
 
         public BaseController(HRSystemDbContext context, string notFoundType = "Page")
         {
@@ -24,13 +24,13 @@ namespace HR_System.Controllers
 
 
         [HttpGet]
-        public IActionResult Add()
+        public virtual IActionResult Add()
         {
             return View("Entry");
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public virtual IActionResult Edit(int id)
         {
             T? entry = (from e in _context.Set<T>() where EF.Property<int>(e, "Id") == id select e).FirstOrDefault();
             if (entry != null)
@@ -42,7 +42,7 @@ namespace HR_System.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public virtual IActionResult Delete(int id)
         {
             T? entry = (from e in _context.Set<T>() where EF.Property<int>(e, "Id") == id select e).FirstOrDefault();
             if (entry != null)
@@ -55,7 +55,7 @@ namespace HR_System.Controllers
 
 
         [HttpPost]
-        public IActionResult PostAdd(T entry)
+        public virtual IActionResult PostAdd(T entry)
         {
             _context.Set<T>().Add(entry);
             _context.SaveChanges();
@@ -63,7 +63,7 @@ namespace HR_System.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostEdit(T entry)
+        public virtual IActionResult PostEdit(T entry)
         {
             int? Id = entry.GetType().GetProperty("Id")?.GetValue(entry) as int?;
 

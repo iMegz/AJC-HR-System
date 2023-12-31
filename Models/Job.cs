@@ -4,8 +4,14 @@ namespace HR_System.Models
 {
     public class Job
     {
+        public Job()
+        {
+            People = new List<Person>();
+        }
+
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int JobId { get; set; }
 
         public string? Title { get; set; }
 

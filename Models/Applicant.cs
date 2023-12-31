@@ -1,4 +1,6 @@
-﻿namespace HR_System.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HR_System.Models
 {
     public enum ApplicantStatus
     {
@@ -18,6 +20,7 @@
 
     public class Applicant : Person
     {
+
         public MilitaryStatus MilitaryStatus { get; set; }
 
         public string? CV { get; set; }

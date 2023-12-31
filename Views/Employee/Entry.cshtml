@@ -1,0 +1,99 @@
+﻿@model HR_System.Controllers.EmployeeViewModel
+@{
+    Employee? employee = Model.Employee;
+    List<Job> jobs = Model.Jobs!;
+
+    ViewData["Title"] = employee != null ? "Edit Employee" : "Add Employee";
+    string controller = employee != null ? "PostEdit" : "PostAdd";
+    
+}
+
+@using (Html.BeginForm(controller, "Employee", FormMethod.Post, new { id = "employeeForm" }))
+{
+<form>
+    <div class="row">
+        <div class="col-6">
+                <div class="mb-3">
+                    <label for="FirstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="FirstName" name="FirstName" value="@employee?.FirstName" required>
+                </div>
+        </div>
+        <div class="col-6">
+                <div class="mb-3">
+                    <label for="LastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="LastName" name="LastName" value="@employee?.LastName" required>
+                </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="Email" name="Email" value="@employee?.Email" required>
+    </div>
+
+        <div class="mb-3">
+            <label for="Phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="Phone" name="Phone" value="@employee?.Phone" required>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="Salary" class="form-label">Job</label>
+            <select class="form-select" name="JobId" required>
+                @foreach (Job job in jobs)
+                {
+                    @Html.Raw(job.JobId == employee?.JobId ?
+                             $"<option selected value='{job.JobId}'>{job.Title}</option>" :
+                             $"<option value='{job.JobId}'>{job.Title}</option>")
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="Salary" class="form-label">Salary</label>
+            <input type="number" step="any" class="form-control" id="Salary" name="Salary" value="@employee?.Salary" required>
+        </div>
+
+
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="StartDate" class="form-label">Start date</label>
+                    <input type="date"
+                           class="form-control"
+                           id="StartDate"
+                           name="StartDate"
+                           value="@employee?.StartDate.ToString("yyyy-MM-dd")"
+                           required>
+
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="EndDate" class="form-label">End date</label>
+                    <input type="date"
+                           class="form-control"
+                           id="EndDate"
+                           name="EndDate"
+                           value="@employee?.EndDate.ToString("yyyy-MM-dd")"
+                           required>
+
+                </div>
+            </div>
+        </div>
+
+        @Html.Hidden("Id", employee.Id)
+        
+        
+        <button disabled="@(employee != null)" type="submit" class="btn btn-dark">@(employee != null ? "Edit" : "Add")</button>
+</form>
+}
+
+@if (employee != null)
+{
+    @section Scripts{
+        <script>
+            watchChanges("employeeForm")
+        </script>
+    }
+}
